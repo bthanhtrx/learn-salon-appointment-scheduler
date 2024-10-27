@@ -13,7 +13,7 @@ MAIN_MENU() {
   fi
 
   LIST_OF_SERVICES=$($PSQL "SELECT * FROM services")
-  #NUMBER_OF_SERVICES=$($PSQL "SELECT COUNT(*) FROM services")
+  NUMBER_OF_SERVICES=$($PSQL "SELECT COUNT(*) FROM services")
   
   echo "$LIST_OF_SERVICES" | while read SERVICE_ID PIPE SERVICE_NAME
   do
@@ -24,7 +24,7 @@ MAIN_MENU() {
   done
 
   read SERVICE_ID_SELECTED
-  if [[ $SERVICE_ID_SELECTED =~ [a-z]+ ]] || [[ $SERVICE_ID_SELECTED -gt 6 ]]
+  if [[ $SERVICE_ID_SELECTED =~ [a-z]+ ]] || [[ $SERVICE_ID_SELECTED -gt $NUMBER_OF_SERVICES ]]
   then
     MAIN_MENU "I could not find that service. What would you like today?"
 
